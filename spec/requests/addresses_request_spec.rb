@@ -17,17 +17,6 @@ RSpec.describe "Addresses", type: :request do
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
     end
-
-    context 'with a query search' do
-      before do
-        Address.limit(5).update(state: 'CA')
-        get '/addresses', params: { q: 'CA' }
-      end
-
-      it 'returns the expected results for the query search' do
-        expect(json.length).to eq(5)
-      end
-    end
   end
 
   # Test suite for GET /addresses/:id

@@ -3,12 +3,7 @@ class AddressesController < ApplicationController
 
   # GET /addresses
   def index
-    if address_params[:q]
-      @addresses = Address.search_by_full_address(params[:q])
-    else
-      @addresses = Address.all
-    end
-
+    @addresses = Address.all
     json_response(@addresses)
   end
 
