@@ -3,7 +3,12 @@ class AddressesController < ApplicationController
 
   # GET /addresses
   def index
-    @addresses = Address.all
+    if address_params[:q]
+      @addresses = Address.search_by_full_address(params[:q])
+    else
+      @addresses = Address.all
+    end
+
     json_response(@addresses)
   end
 
@@ -34,7 +39,7 @@ class AddressesController < ApplicationController
 
   def address_params
     # whitelist params
-    params.permit(:line1, :line2, :city, :state, :zip)
+    params.permit(:line1, :line2, :city, :state, :zip, :q)
   end
 
   def set_address
