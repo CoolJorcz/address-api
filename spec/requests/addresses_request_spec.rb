@@ -9,9 +9,8 @@ RSpec.describe "Addresses", type: :request do
     before { get '/addresses' }
 
     it 'returns addresses' do
-      # Note `json` is a custom helper to parse JSON responses
       expect(json).not_to be_empty
-      expect(json.size).to eq(10)
+      expect(json['addresses'].size).to eq(10)
     end
 
     it 'returns status code 200' do
@@ -26,7 +25,7 @@ RSpec.describe "Addresses", type: :request do
     context 'when the record exists' do
       it 'returns the todo' do
         expect(json).not_to be_empty
-        expect(json['id']).to eq(address_id)
+        expect(json['address']['id']).to eq(address_id)
       end
 
       it 'returns status code 200' do
@@ -63,7 +62,7 @@ RSpec.describe "Addresses", type: :request do
       before { post '/addresses', params: valid_attributes }
 
       it 'creates a todo' do
-        expect(json['line1']).to eq('Massachusetts Hall')
+        expect(json['address']['line1']).to eq('Massachusetts Hall')
       end
 
       it 'returns status code 201' do

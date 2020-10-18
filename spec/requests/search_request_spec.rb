@@ -10,7 +10,7 @@ RSpec.describe "Searches", type: :request do
     end
 
     it 'returns the expected results for the query search' do
-      expect(json.length).to eq(5)
+      expect(json['addresses'].length).to eq(5)
     end
   end
 end
